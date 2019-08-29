@@ -3,16 +3,21 @@
 ##### ICCV 2019 Computer Vision for Fashion, Art and Design 
 [[Paper]]()[[Video]](https://www.youtube.com/watch?v=A_SwsM7Ox5M)
 
-## Description
+### Running the code
 Given an input image, our method CBS can stylize a certain object class with a specif style. Run
 the following command to achieve the result below.
 
 ```
-python main.py 
+python main.py -i images/example.jpg -o images/stylized.jpg -s styles/mosaic.pth -c pedestrian
 ```
 
 
 Input Image          |  Stylized Cars with CBS
+:-------------------------:|:-------------------------:
+![original image](results/gt_image.png) |  ![predicted image](results/pred_image.png)
+
+### Choosing the style and the object class
+Styles          |  Object Classes
 :-------------------------:|:-------------------------:
 ![original image](results/gt_image.png) |  ![predicted image](results/pred_image.png)
 

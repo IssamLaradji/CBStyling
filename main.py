@@ -37,7 +37,8 @@ def main(img_fname, style_id, class_id):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-i", "--img-path", type=str, default="", help="path of image to style")
+    parser.add_argument("-i", "--img_fname", type=str, default="", help="path of image to style")
+    parser.add_argument("-o", "--out_fname", type=str, default="", help="path of image to style")
     parser.add_argument("-s", "--style", type=int, default=0, help="Choose a style 0-3")
     parser.add_argument("-c", "--class_id", type=int, default=11, help="Choose a class_id 1-20")
     args = parser.parse_args()
