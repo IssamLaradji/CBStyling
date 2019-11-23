@@ -12,14 +12,7 @@ python main.py -i images/example.jpg -o images/stylized.jpg -s styles/mosaic.pth
 ```
 
 
-Input Image          |  Stylized Cars with CBS
-:-------------------------:|:-------------------------:
-![original image](results/gt_image.png) |  ![predicted image](results/pred_image.png)
-
-### Choosing the style and the object class
-Styles          |  Object Classes
-:-------------------------:|:-------------------------:
-![original image](results/gt_image.png) |  ![predicted image](results/pred_image.png)
+![example](example.jpeg) 
 
 
 ## Citation 
