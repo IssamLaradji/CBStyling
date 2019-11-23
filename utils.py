@@ -15,7 +15,7 @@ from matplotlib.figure import Figure
 # =====================================
 # helpers
 import cv2, glob, re
-from neural_style.transformer_net import TransformerNet
+from . import transformer_net
 from . import dabnet
 import torch
 import tqdm
@@ -85,7 +85,7 @@ def get_styled_image(style_model, image):
 
 def create_style_model(style_number=0):
     model_file = glob.glob('fast_neural_style_models/*.pth')[style_number]
-    transformer = TransformerNet()
+    transformer = transformer_net.TransformerNet()
     # load model
     state_dict = torch.load(model_file)
     # remove saved deprecated running_* keys in InstanceNorm from the checkpoint
