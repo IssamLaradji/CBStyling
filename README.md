@@ -16,12 +16,13 @@ python main.py -i images/example.png -o images/stylized.png -s styles/mosaic.pth
 
 ### Relevant work
 
-For segmentation, we used the pretrained model in [1]
-For style transfer, we used the pretrained model in [2].
+- For segmentation, we used the pretrained model in [1]; and
+- for style transfer, we used the pretrained model in [2].
 
 In this work we combined these two pretrained models to segment different objects in a scene. But if you would like to train for segmenting new objects or new styles, you can use the training scripts in [1,2].
 
 [1] https://github.com/Reagan1311/DABNet/
+
 [2] https://github.com/pytorch/examples/tree/master/fast_neural_style
 
 
