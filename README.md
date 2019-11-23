@@ -4,8 +4,8 @@
 [[Paper]]()[[Video]](https://www.youtube.com/watch?v=A_SwsM7Ox5M)
 
 ### Running the code
-Given an input image, our method CBS can stylize a certain object class with a specif style. Run
-the following command to achieve the result below.
+Given an input image, our method CBS can stylize a certain object class with a specifi style. Run
+the following command to achieve a result similar to the one below.
 
 ```
 python main.py -i images/example.jpg -o images/stylized.jpg -s styles/mosaic.pth -c pedestrian
