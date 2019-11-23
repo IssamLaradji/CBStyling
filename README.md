@@ -8,7 +8,7 @@ Given an input image, our method CBS can stylize a certain object class with a s
 the following command to achieve a result similar to the one below.
 
 ```
-python main.py -i images/example.jpg -o images/stylized.jpg -s styles/mosaic.pth -c pedestrian
+python main.py -i images/example.png -o images/stylized.png -s styles/mosaic.pth -c pedestrian
 ```
 
 
