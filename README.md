@@ -25,6 +25,7 @@ Styles          |  Object Classes
 ## Citation 
 If you find the code useful for your research, please cite:
 
+```
 @misc{kurzman2019classbased,
     title={Class-Based Styling: Real-time Localized Style Transfer with Semantic Segmentation},
     author={Lironne Kurzman and David Vazquez and Issam Laradji},
@@ -33,3 +34,4 @@ If you find the code useful for your research, please cite:
     archivePrefix={arXiv},
     primaryClass={cs.CV}
 }
+```
