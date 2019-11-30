@@ -12,7 +12,7 @@ def main(img_fname, out_fname, style_id, class_id):
     image = ut.load_image(img_fname)
     semseg = ut.get_semseg_image(seg_model, image)
     # Get image with mask showing class_id 13, which is cars by default
-    print("Stylizing class %d" % class_id)
+    print("Stylizing class %d..." % class_id)
     fg_image = ut.get_masked_image(seg_model, image, category=class_id, bg=0)
     # Get image with mask showing everything except class_id 13
     bg_image = ut.get_masked_image(seg_model, image, category=class_id, bg=1)
@@ -29,6 +29,7 @@ def main(img_fname, out_fname, style_id, class_id):
     # ======================================
     # Save part
     ut.save_image(out_fname, fg_styled + bg_image)
+    print("SAVED: %s" % out_fname)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
