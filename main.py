@@ -2,7 +2,7 @@ import argparse
 import utils as ut
 
 
-def main(img_fname, style_id, class_id):
+def main(img_fname, out_fname, style_id, class_id):
     # Create style and segmentation model
     seg_model = ut.create_seg_model()
     style_model = ut.create_style_model(style_id)
@@ -11,11 +11,11 @@ def main(img_fname, style_id, class_id):
     # Seg part
     image = ut.load_image(img_fname)
     semseg = ut.get_semseg_image(seg_model, image)
-    # Get image with mask showing class_id 11, which is people by default
-    print(class_id)
-    fg_image = ut.get_masked_image(seg_model, image, class_id=class_id, bg=0)
+    # Get image with mask showing class_id 13, which is cars by default
+    print("Stylizing class %d" % class_id)
+    fg_image = ut.get_masked_image(seg_model, image, category=class_id, bg=0)
     # Get image with mask showing everything except class_id 13
-    bg_image = ut.get_masked_image(seg_model, image, class_id=class_id, bg=1)
+    bg_image = ut.get_masked_image(seg_model, image, category=class_id, bg=1)
 
     # ======================================
     # Style part
@@ -28,11 +28,7 @@ def main(img_fname, style_id, class_id):
 
     # ======================================
     # Save part
-    ut.save_image('class_id_%d_original.png' %class_id, ut.f2l(image[0].cpu().numpy()))
-    ut.save_image('class_id_%d_styled_fg.png' %class_id, fg_styled + bg_image)
-    ut.save_image('class_id_%d_fg.png' %class_id, image_style1)
-    ut.save_image('class_id_%d_semseg.png' %class_id, ut.f2l(ut.VOCColorize()(semseg)))
-
+    ut.save_image(out_fname, fg_styled + bg_image)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -43,4 +39,4 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--class_id", type=int, default=11, help="Choose a class_id 1-20")
     args = parser.parse_args()
 
-    main(args.img_fname, args.style, args.class_id)
+    main(args.img_fname, args.out_fname, args.style, args.class_id)

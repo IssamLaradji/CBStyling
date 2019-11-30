@@ -15,8 +15,8 @@ from matplotlib.figure import Figure
 # =====================================
 # helpers
 import cv2, glob, re
-from . import transformer_net
-from . import dabnet
+import transformer_net
+import dabnet
 import torch
 import tqdm
 import argparse
@@ -70,7 +70,7 @@ def create_seg_model():
     model = build_model("DABNet", num_classes=19)
     model.eval()
     model = model.cuda()
-    model.load_state_dict(torch.load("pretrained_weights/DABNet_cityscapes.pth")["model"])
+    model.load_state_dict(torch.load("pretrained/DABNet_cityscapes.pth")["model"])
 
     return model
 @torch.no_grad()
@@ -84,7 +84,7 @@ def get_styled_image(style_model, image):
 
 
 def create_style_model(style_number=0):
-    model_file = glob.glob('fast_neural_style_models/*.pth')[style_number]
+    model_file = glob.glob('styles/*.pth')[style_number]
     transformer = transformer_net.TransformerNet()
     # load model
     state_dict = torch.load(model_file)
