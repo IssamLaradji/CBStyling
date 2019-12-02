@@ -30,12 +30,11 @@ In this work we combined these two pretrained models to segment different object
 If you find the code useful for your research, please cite:
 
 ```
-@misc{kurzman2019classbased,
-    title={Class-Based Styling: Real-time Localized Style Transfer with Semantic Segmentation},
-    author={Lironne Kurzman and David Vazquez and Issam Laradji},
-    year={2019},
-    eprint={1908.11525},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@inproceedings{kurzman2019class,
+  title={Class-Based Styling: Real-time Localized Style Transfer with Semantic Segmentation},
+  author={Kurzman, Lironne and Vazquez, David and Laradji, Issam},
+  booktitle={Proceedings of the IEEE International Conference on Computer Vision Workshops},
+  pages={0--0},
+  year={2019}
 }
 ```
