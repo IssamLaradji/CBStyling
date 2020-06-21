@@ -54,11 +54,21 @@ class DABNet(nn.Module):
         # DAB Block 1
         output1_0 = self.downsample_1(output0_cat)
         output1 = self.DAB_Block_1(output1_0)
+
+        # make same size
+        output1_0 = F.interpolate(output1_0, down_2.shape[-2:], align_corners=False, mode='bilinear')
+        output1 = F.interpolate(output1, down_2.shape[-2:], align_corners=False, mode='bilinear')
+        
         output1_cat = self.bn_prelu_2(torch.cat([output1, output1_0, down_2], 1))
 
         # DAB Block 2
         output2_0 = self.downsample_2(output1_cat)
         output2 = self.DAB_Block_2(output2_0)
+
+        # make same size
+        output2_0 = F.interpolate(output2_0, down_3.shape[-2:], align_corners=False, mode='bilinear')
+        output2 = F.interpolate(output2, down_3.shape[-2:], align_corners=False, mode='bilinear')
+
         output2_cat = self.bn_prelu_3(torch.cat([output2, output2_0, down_3], 1))
 
         out = self.classifier(output2_cat)
@@ -159,6 +169,7 @@ class DownSamplingBlock(nn.Module):
 
         if self.nIn < self.nOut:
             max_pool = self.max_pool(input)
+            output = F.interpolate(output, max_pool.shape[-2:], align_corners=True, mode='bilinear')
             output = torch.cat([output, max_pool], 1)
 
         output = self.bn_prelu(output)

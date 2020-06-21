@@ -1,13 +1,12 @@
 import argparse
 import torch
 import numpy as np
-import pycocotools.mask as mask_utils
 import pylab as plt
 from PIL import Image
 
 from torchvision import transforms
 from torch.autograd import Variable
-
+import torch.nn.functional as F
 import cv2
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.patches import Polygon
@@ -76,8 +75,10 @@ def create_seg_model():
 @torch.no_grad()
 def get_styled_image(style_model, image):
     styled = style_model(image)
-    # styled.data.cpu().numpy()
-    # return f2l([0])
+
+    # make same size
+    styled = F.interpolate(styled, image.size()[2:], mode='bilinear', align_corners=False)
+
     img = styled[0].cpu().detach().clone().clamp(0, 255).numpy()
     img = img.transpose(1, 2, 0).astype("uint8")
     return img
@@ -258,46 +259,6 @@ def ensure_image_list(T, SIZE_DIVISIBILITY=1):
     image_list = T
 
   return image_list
-
-def targets2annList(preds, shape, image_id=-1, maskVoid=None):
-  # preds.to("cpu")
-  H, W = shape
-  preds = preds.resize((W, H))
-
-  scores = preds.get_field("scores")
-  labels = preds.get_field("labels")
-  masks = preds.get_field("mask")
-
-  masker = Masker(threshold=0.5, padding=1)
-
-  if list(masks.shape[-2:]) != [H, W]:
-    masks = masker(masks.expand(1, -1, -1, -1, -1), preds)
-    masks = masks[0]
-
-  # apply mask void
-  if maskVoid is not None and masks.shape[0] > 0:
-    masks = masks * maskVoid.byte()
-
-  rles = [
-    mask_utils.encode(np.array(mask[0, :, :, np.newaxis], order="F"))[0]
-    for mask in masks
-  ]
-  for rle in rles:
-    rle["counts"] = rle["counts"].decode("utf-8")
-
-  annList = segm2annList(
-    segm=rles,
-    boxes=preds.bbox.cpu(),
-    scoreList=scores,
-    categoryList=labels,
-    H=H,
-    W=W,
-    image_id=image_id,
-    mode="xyxy",
-    mask=None,
-    score_threshold=0.5)
-
-  return annList
 
 def segm2annList(segm,
                  boxes,
