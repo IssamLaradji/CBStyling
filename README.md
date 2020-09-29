@@ -1,7 +1,7 @@
 ## Class-Based Styling
 ### Real-time Localized Style Transfer with Semantic Segmentation
 ##### ICCV 2019 Computer Vision for Fashion, Art and Design 
-[[Paper]]()[[Video]](https://www.youtube.com/watch?v=A_SwsM7Ox5M)
+[[Paper]](https://arxiv.org/abs/1908.11525)[[Video]](https://www.youtube.com/watch?v=A_SwsM7Ox5M)
 
 ### Running the code
 Given an input image, our method CBS can stylize a certain object class with a specifi style. Run
